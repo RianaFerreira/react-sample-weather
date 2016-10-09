@@ -2,7 +2,11 @@ var React = require('react');
 
 var WeatherMessage = React.createClass({
   render: function () {
-    return (<div>Message</div>);
+    // ES6 destructuring syntax
+    var {temp, location} = this.props;
+    return (
+      <div>It is {temp} in {location}.</div>
+    );
   }
 });
 

@@ -27199,7 +27199,25 @@
 	var Weather = React.createClass({
 	  displayName: 'Weather',
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      location: 'Brisbane',
+	      temp: 24
+	    };
+	  },
+	  handleSearch: function handleSearch(location) {
+	    // this.setState({
+	    //   location: location,
+	    //   temp: 27
+	    // })
+	  },
 	  render: function render() {
+	    // ES6 destructuring syntax
+	    var _state = this.state;
+	    var temp = _state.temp;
+	    var location = _state.location;
+
+
 	    return React.createElement(
 	      'div',
 	      null,
@@ -27208,8 +27226,8 @@
 	        null,
 	        'Get Weather'
 	      ),
-	      React.createElement(WeatherForm, null),
-	      React.createElement(WeatherMessage, null)
+	      React.createElement(WeatherForm, { onSearch: this.handleSearch }),
+	      React.createElement(WeatherMessage, { location: location, temp: temp })
 	    );
 	  }
 	});
@@ -27227,10 +27245,20 @@
 	var WeatherForm = React.createClass({
 	  displayName: 'WeatherForm',
 
+	  onFormSubmit: function onFormSubmit(e) {
+	    e.preventDefault();
+
+	    var location = this.refs.inputElement.value;
+
+	    if (location.length > 0) {
+	      this.refs.inputElement.value = '';
+	      this.props.onSearch(location);
+	    }
+	  },
 	  render: function render() {
 	    return React.createElement(
 	      'form',
-	      null,
+	      { onSubmit: this.onFormSubmit },
 	      React.createElement(
 	        'div',
 	        null,
@@ -27263,10 +27291,19 @@
 	  displayName: 'WeatherMessage',
 
 	  render: function render() {
+	    // ES6 destructuring syntax
+	    var _props = this.props;
+	    var temp = _props.temp;
+	    var location = _props.location;
+
 	    return React.createElement(
 	      'div',
 	      null,
-	      'Message'
+	      'It is ',
+	      temp,
+	      ' in ',
+	      location,
+	      '.'
 	    );
 	  }
 	});
