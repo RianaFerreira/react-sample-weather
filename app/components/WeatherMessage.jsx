@@ -17,7 +17,7 @@ var React = require('react');
 
 // destructuring props directly in args
 var WeatherMessage = ({temp, location}) => {
-  return (<div>It is {temp} in {location}.</div>);
+  return (<div className="text-center">It is {temp} in {location}.</div>);
 };
 
 module.exports = WeatherMessage;

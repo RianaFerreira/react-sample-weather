@@ -4,22 +4,25 @@ const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?app
 
 module.exports = {
   getTemp: function (location) {
+    // convert spaces in the location string to % for browser
     var encodedLocation = encodeURIComponent(location);
 
     // ES6 template strings `${inject variables inside a string}`
     var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
 
     return axios.get(requestUrl).then(function (response) {
+      // successfull request
       // JS function that works with DevTools
-      debugger;
-            
       if (response.data.cod && response.data.message) {
+        console.log('successful axios request has failed');
+        console.log(response);
         throw new Error(response.data.message);
       } else {
         return response.data.main.temp;
       }
     }, function (response) {
-      throw new Error(response.data.message);
+      // failed request
+      throw new Error(response.response.data.message);
     })
   }
 }
