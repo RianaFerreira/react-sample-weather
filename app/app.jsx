@@ -22,7 +22,8 @@ ReactDOM.render(
     <Route path="/" component={Main}>
       <Route path="about" component={About} />
       <Route path="examples" component={Examples} />
-      // don't use Link for navigation links use IndexLink instead for the root route
+      // don't use Link for navigation links 
+      // use IndexLink instead for the root route
       <IndexRoute component={Weather} />
     </Route>
   </Router>,
